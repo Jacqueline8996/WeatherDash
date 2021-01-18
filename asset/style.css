@@ -5,3 +5,21 @@ nav{
     font-family: 'Times New Roman', Times, serif;
     text-align: center;
 }
+body{
+    font-family: 'Times New Roman', Times, serif;
+}
+.container{
+    padding-top: 15px;
+    width: 100%;
+}
+.displayDashboard{
+    border: 1px solid gray;
+}
+.fiveDay{
+    border: 1px solid gray;
+}
+.searchArea{
+    border: 1px solid gray;
+    background-color: rgb(221, 221, 221);
+    font-size: 20px;
+}

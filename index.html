@@ -5,19 +5,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <link rel="stylesheet" href="asset/style.css">
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+      integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+      crossorigin="anonymous"
+    />
     <title>Weather Dashboard</title>
 </head>
 <nav> Weather Dashboard</nav>
 <body>
-    <div class = "container"></div>
-    <div class = "row">
-        <div class = "col-3">
-            space
+    <div class = "container">
+        <div class = "row">   
+            <div class = "col-md-3 searchArea" >
+                <!-- search button for data -->
+                <p>Search for a City:</p>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="City Name" aria-label="City Name" aria-describedby="button-addon2">
+                    <button class="btn btn-primary fas fa-search" type="button" id="button-addon2"></button>
+                </div>
+                <div class = "pastCity"></div>
+            </div>
+            <div class = "col-md-9 displayDashboard">
+                <div class = "row">
+                    <div class = "col-md-12 dailybreakdown" >
+                        ss
+                    </div>
+                </div>
+                <div class = "row">
+                    <div class = "col-md-12 fiveDay" >
+                        sss
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class = "col-6">
-            space
-        </div>
-
     </div>
 
     
