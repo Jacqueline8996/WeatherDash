@@ -24,6 +24,11 @@ body{
     font-size: 20px;
 }
 .oldSearches{
-    color: blue;
+    color: rgb(176, 176, 177);
     font-family: 'Times New Roman', Times, serif;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid gray;
+    border-radius: 2px;
+    text-align: left;
+    width: 200px;
 }
