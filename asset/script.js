@@ -34,7 +34,7 @@ function uVData(latitude, longitude){
         var uvIndex = parseInt(response["value"]);
         var whatUv = $("<p>");
         var pFour = whatUv.text("UV Index: " + uvIndex);
-        //changes color for diffrent ranges of index
+
         if (uvIndex >= 11) {
             whatUv.addClass("extreme");
         } 
@@ -51,9 +51,18 @@ function uVData(latitude, longitude){
             whatUv.addClass("low");
         }
         
-        $(".dailybreakdown").append(pFour);
+        $("#displayInfo").append(pFour);
 
     });
+}
+
+function clearDiv(){
+    $(".dailyTitle").empty();
+    $("#nameOfCity").empty();
+    $("#todayDate").empty();
+    $("#icon").empty();
+    $("#displayInfo").empty();
+
 }
 
 
@@ -72,36 +81,45 @@ function displaydaily(cityname) {
         var whatCity = response["city"]["name"];
         console.log("my city is ,", whatCity);
         $("#nameOfCity").append(whatCity);
+
+        //finding date for today
+        var whatDateTime = response["list"][0]["dt_txt"];
+        var whatDateWhole = whatDateTime.split(" ");
+        var whatDateSplit = whatDateWhole[0].split("-");
+        var whatDate = "(" + whatDateSplit[1]+ "/" + whatDateSplit[2] + "/" + whatDateSplit[0] + ")";
+        $("#todayDate").append(whatDate);
+        console.log("what date",whatDate);
+
         var iconcode = response["list"][0]["weather"][0]["icon"]
         var iconurl = "http://openweathermap.org/img/w/" + iconcode + ".png";
         $("#icon").append('<img id="weatherImage"' + "src="+ iconurl + ' />');
         
-
         console.log("my response ", response);
         // Creating an element to have the tempature displayed
         var tempature = (response["list"][0]["main"]["temp"]);
         var whatTemp = $("<p>")
         // var degree = $("<sup>")
-       
+
         var pOne = whatTemp.text("Tempature: " + tempature + "F");
-        $(".dailybreakdown").append(pOne);
+        $("#displayInfo").append(pOne);
 
         //finds and adds humidity
         var humidity = (response["list"][0]["main"]["humidity"]);
         var whatHum = $("<p>")
         var pTwo = whatHum.text("Humidity: " + humidity + "%");
-        $(".dailybreakdown").append(pTwo);
+        $("#displayInfo").append(pTwo);
 
         //find and add wind speed 
         var windSpeed = (response["list"][0]["wind"]["speed"]);
         var whatSpeed = $("<p>")
         var pThree = whatSpeed.text("WindSpeed: " + windSpeed + "MPH");
-        $(".dailybreakdown").append(pThree);
+        $("#displayInfo").append(pThree);
 
         //finds and adds UV Index 
         var latiCo = (response["city"]["coord"]["lat"]);
         var longCo = (response["city"]["coord"]["lon"]);
         uVData(latiCo,longCo);
+        
 
     });
 
@@ -109,12 +127,15 @@ function displaydaily(cityname) {
 
 //Gets the name of the town 
 $("#searchBtn").on("click", function (event) {
+    $(document).ready();
     event.preventDefault();
     // document.getElementById("weathericon").style.visibility = "hidden";
     var citySearch = $("#cityInput").val();
     console.log("what is the town places",citySearch);
     searchHistory(citySearch);
     displaydaily(citySearch);
+    
+    
 
 })
 

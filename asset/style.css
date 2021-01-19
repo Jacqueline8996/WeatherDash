@@ -50,9 +50,13 @@ body{
     background-color: rgb(64, 255, 6);
 }
 #nameOfCity{
-    font-size: 50px;
+    font-size: 35px;
     font-weight: bolder;
     padding-left: 15px;
+}
+#todayDate{
+    font-size: 25px;
+    font-weight: bolder;
 }
 #weatherImage{
     display: block;
