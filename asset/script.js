@@ -14,6 +14,7 @@ function searchHistory(cityname){
         var histBtn = $("#historyBtn").html();
         console.log("what is the town places",histBtn);
         displaydaily(histBtn);
+        fiveDay(histBtn);
     })
     
 
@@ -68,7 +69,7 @@ function clearDiv(){
 
 function displaydaily(cityname) {
     
-    $(".dailyTitle").empty();
+    // $(".dailyTitle").empty();
     var queryURL = "http://api.openweathermap.org/data/2.5/forecast?q="+cityname+"&appid="+apiKey+"&units=imperial";
 
     console.log("what my URL",queryURL);
@@ -125,6 +126,49 @@ function displaydaily(cityname) {
 
 }
 
+function fiveDay(cityname){
+
+    
+    var queryURL = "http://api.openweathermap.org/data/2.5/forecast?q="+cityname+"&appid="+apiKey+"&units=imperial";
+
+    console.log("what my URL",queryURL);
+    // Creating an AJAX call for the specific movie button being clicked
+    $.ajax({
+    url: queryURL,
+    method: "GET"
+    }).then(function(response) {
+        console.log("response5day",response);
+        
+        //finding date for today
+        // var whatDateTime = response["list"][0]["dt_txt"];
+        // var whatDateWhole = whatDateTime.split(" ");
+        // var whatDateSplit = whatDateWhole[0].split("-");
+        // var whatDate = "(" + whatDateSplit[1]+ "/" + whatDateSplit[2] + "/" + whatDateSplit[0] + ")";
+        // $("#todayDate").append(whatDate);
+        // console.log("what date",whatDate);
+
+        // var iconcode = response["list"][0]["weather"][0]["icon"]
+        // var iconurl = "http://openweathermap.org/img/w/" + iconcode + ".png";
+        // $("#icon").append('<img id="weatherImage"' + "src="+ iconurl + ' />');
+        
+        // console.log("my response ", response);
+        // Creating an element to have the tempature displayed
+        // var tempature = (response["list"][0]["main"]["temp"]);
+        // var whatTemp = $("<p>")
+        // var degree = $("<sup>")
+
+        // var pOne = whatTemp.text("Tempature: " + tempature + "F");
+        // $("#displayInfo").append(pOne);
+
+        //finds and adds humidity
+        // var humidity = (response["list"][0]["main"]["humidity"]);
+        // var whatHum = $("<p>")
+        // var pTwo = whatHum.text("Humidity: " + humidity + "%");
+        // $("#displayInfo").append(pTwo);
+    });
+
+       
+}
 //Gets the name of the town 
 $("#searchBtn").on("click", function (event) {
     $(document).ready();
@@ -134,8 +178,6 @@ $("#searchBtn").on("click", function (event) {
     console.log("what is the town places",citySearch);
     searchHistory(citySearch);
     displaydaily(citySearch);
-    
-    
+    fiveDay(citySearch);
 
 })
-
