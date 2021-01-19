@@ -32,3 +32,31 @@ body{
     text-align: left;
     width: 200px;
 }
+.extreme{
+    background-color: rgb(202, 15, 202);
+    color: white;
+}
+.very-High{
+    background-color: rgb(202, 15, 15);
+    color: white;
+}
+.high{
+    background-color: rgb(236, 132, 34);
+}
+.moderate{
+    background-color: rgb(248, 244, 11);
+}
+.low{
+    background-color: rgb(64, 255, 6);
+}
+#nameOfCity{
+    font-size: 50px;
+    font-weight: bolder;
+    padding-left: 15px;
+}
+#weatherImage{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 25%;
+}

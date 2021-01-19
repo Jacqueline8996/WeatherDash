@@ -31,11 +31,26 @@ function uVData(latitude, longitude){
     method: "GET"
     }).then(function(response) {
         console.log("my response", response)
-
-        var uvIndex = (response["value"]);
-        var whatUv = $("<p>")
-        var pFour = whatUv.text("UV Index: " + uvIndex );
+        var uvIndex = parseInt(response["value"]);
+        var whatUv = $("<p>");
+        var pFour = whatUv.text("UV Index: " + uvIndex);
         //changes color for diffrent ranges of index
+        if (uvIndex >= 11) {
+            whatUv.addClass("extreme");
+        } 
+        else if(uvIndex <= 11 && uvIndex >=8){
+            whatUv.addClass("very-High");
+        }
+        else if(uvIndex <= 7 && uvIndex >= 6){
+            whatUv.addClass("high");
+        }
+        else if(uvIndex <= 5 && uvIndex >= 3){
+            whatUv.addClass("moderate");
+        }
+        else{
+            whatUv.addClass("low");
+        }
+        
         $(".dailybreakdown").append(pFour);
 
     });
@@ -54,11 +69,13 @@ function displaydaily(cityname) {
     method: "GET"
     }).then(function(response) {
         //title of the city and weather icon
-        var whatCity = $(".cityName").html(cityname);
-        $(".dailybreakdown").append(whatCity);
+        var whatCity = response["city"]["name"];
+        console.log("my city is ,", whatCity);
+        $("#nameOfCity").append(whatCity);
         var iconcode = response["list"][0]["weather"][0]["icon"]
         var iconurl = "http://openweathermap.org/img/w/" + iconcode + ".png";
-        $(".icon").append('<img id="theImg"' + "src="+ iconurl + ' />');
+        $("#icon").append('<img id="weatherImage"' + "src="+ iconurl + ' />');
+        
 
         console.log("my response ", response);
         // Creating an element to have the tempature displayed
@@ -82,13 +99,9 @@ function displaydaily(cityname) {
         $(".dailybreakdown").append(pThree);
 
         //finds and adds UV Index 
-
         var latiCo = (response["city"]["coord"]["lat"]);
         var longCo = (response["city"]["coord"]["lon"]);
-
         uVData(latiCo,longCo);
-
-
 
     });
 
