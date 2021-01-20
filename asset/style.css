@@ -64,3 +64,9 @@ body{
     margin-right: auto;
     width: 25%;
 }
+.forcast{
+    background-color: rgb(42, 122, 214);
+    padding: 10px;
+    margin: 10px;
+
+}
