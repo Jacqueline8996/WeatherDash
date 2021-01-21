@@ -1,7 +1,5 @@
-// var pastCitydiv = document.queryselector(".pastCity");
-
-
 var apiKey = "dcb8c612edc0549f82dca82fa9beb12d";
+
 
 function searchHistory(cityname){
 
@@ -13,25 +11,24 @@ function searchHistory(cityname){
     $("#historyBtn").on("click", function (event) {
         var histBtn = $("#historyBtn").html();
         console.log("what is the town places",histBtn);
+        storeHistory(histBtn);
         displaydaily(histBtn);
         fiveDay(histBtn);
     })
-    
 
 
 }
+
 
 function uVData(latitude, longitude){
 
     var uvUrL = "http://api.openweathermap.org/data/2.5/uvi?lat="+latitude+"&lon="+longitude+"&appid="+apiKey;
 
-    console.log("what my URL",uvUrL);
     // Creating an AJAX call for the specific movie button being clicked
     $.ajax({
     url: uvUrL,
     method: "GET"
     }).then(function(response) {
-        console.log("my response", response)
         var uvIndex = parseInt(response["value"]);
         var whatUv = $("<p>");
         var pFour = whatUv.text("UV Index: " + uvIndex);
@@ -63,47 +60,45 @@ function clearDiv(){
     $("#todayDate").empty();
     $("#icon").empty();
     $("#displayInfo").empty();
-
+    $("#fiveDay").empty();
+    $("#fivedayTitle").empty();
+    $("#day1cast").empty();
+    $("#day2cast").empty();
+    $("#day3cast").empty();
+    $("#day4cast").empty();
+    $("#day5cast").empty();
 }
 
 function fiveDay(latitude,longitude,todaydate){
-
+    $(".fiveDay").addClass("boarderFive");
     var whatTitle = $("<p>");
     var pForTitle = whatTitle.html("5-DAY Forcast");
     $("#fivedayTitle").append(pForTitle);
     var dateVar = todaydate;
-    // var dateVar = [2021,01,31];
-    
-    console.log("what today date", dateVar)
+    var dateValidate = JSON.parse(dateVar[2])+ 5;
 
     // "current+minutely,hourly,"
     var fiveURL = "http://api.openweathermap.org/data/2.5/onecall?lat="+latitude+"&lon="+longitude+"&exclude=current+minutely,hourly,"+"&appid="+apiKey+"&units=imperial";
-    // var queryURL = "http://api.openweathermap.org/data/2.5/forecast/daily?id="+cityID+"&cnt=5"+"&appid="+apiKey+"&units=imperial";
+   
 
-    console.log("what my URL for 5 day",fiveURL);
     // Creating an AJAX call for the specific movie button being clicked
     $.ajax({
     url: fiveURL,
     method: "GET"
     }).then(function(response) {
-        console.log("response5day",response);
         var whatTitleFor = $("<p>")
         $(whatTitleFor).html("date"+1)
 
-
         //get the 5 day forcast
         for(i = 1; i < 6; i++) {
+
             //getting date 
-
             var dateForcast = JSON.parse(dateVar[2])+i;
-            console.log("what date is it in the forcast", dateForcast);
-
             var pDate = $("<p>");
             var whatDateForcast = pDate.html(dateVar[1]+ "/" + dateForcast + "/" + dateVar[0]);
             pDate.addClass("dateForcast");
 
             $("#day"+i+"cast").append(whatDateForcast);
-            console.log("what date for the forcast",whatDateForcast);
             $("#day"+i+"cast").addClass("forcast")
 
             //get the icon 
@@ -112,12 +107,10 @@ function fiveDay(latitude,longitude,todaydate){
             $("#day"+i+"cast").append('<img id="weatherImage2"' + "src="+ iconurl + ' />');
             
             //get the tempature
-            console.log("my response ", response);
             var tempaturefor = (response["daily"][i]["temp"]["day"]);
             var whatTempfor = $("<p>");
             var pForOne = whatTempfor.text("Temp: " + tempaturefor + " F");
             $("#day"+i+"cast").append(pForOne);
-
 
             //finds and adds humidity
             var humidityFor = (response["daily"][i]["humidity"]);
@@ -130,19 +123,18 @@ function fiveDay(latitude,longitude,todaydate){
 
         }
         
-      
     });
-
        
 }
 
 
 function displaydaily(cityname) {
+    clearDiv();
     
+    $(".displayDashboard").addClass("boarderDaily")
     // $(".dailyTitle").empty();
     var queryURL = "http://api.openweathermap.org/data/2.5/forecast?q="+cityname+"&appid="+apiKey+"&units=imperial";
 
-    console.log("what my URL",queryURL);
     // Creating an AJAX call for the specific movie button being clicked
     $.ajax({
     url: queryURL,
@@ -150,7 +142,6 @@ function displaydaily(cityname) {
     }).then(function(response) {
         //title of the city and weather icon
         var whatCity = response["city"]["name"];
-        console.log("my city is ,", whatCity);
         $("#nameOfCity").append(whatCity);
 
         //finding date for today
@@ -159,13 +150,12 @@ function displaydaily(cityname) {
         var whatDateSplit = whatDateWhole[0].split("-");
         var whatDate = "(" + whatDateSplit[1]+ "/" + whatDateSplit[2] + "/" + whatDateSplit[0] + ")";
         $("#todayDate").append(whatDate);
-        console.log("what date",whatDate);
 
+        //Adding in ICON To the event 
         var iconcode = response["list"][0]["weather"][0]["icon"]
         var iconurl = "http://openweathermap.org/img/w/" + iconcode + ".png";
         $("#icon").append('<img id="weatherImage"' + "src="+ iconurl + ' />');
         
-        console.log("my response ", response);
         // Creating an element to have the tempature displayed
         var tempature = (response["list"][0]["main"]["temp"]);
         var whatTemp = $("<p>");
@@ -203,11 +193,10 @@ function displaydaily(cityname) {
 $("#searchBtn").on("click", function (event) {
     $(document).ready();
     event.preventDefault();
-    // document.getElementById("weathericon").style.visibility = "hidden";
     var citySearch = $("#cityInput").val();
-    console.log("what is the town places",citySearch);
     searchHistory(citySearch);
     displaydaily(citySearch);
+
     
 
 })

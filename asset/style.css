@@ -12,10 +12,10 @@ body{
     padding-top: 15px;
     width: 100%;
 }
-.displayDashboard{
+.boarderDaily{
     border: 1px solid gray;
 }
-.fiveDay{
+.boarderFive{
     border: 1px solid gray;
 }
 .searchArea{
