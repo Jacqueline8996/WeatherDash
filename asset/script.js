@@ -1,21 +1,40 @@
 var apiKey = "dcb8c612edc0549f82dca82fa9beb12d";
-
+var storedHistory = [];
 
 function searchHistory(cityname){
+    var saveCity = cityname;
+    storedHistory.push(saveCity);
+    console.log("how long is my list", storedHistory);
+    
+
 
     var pastSearch = $("<button>");
     pastSearch.addClass("oldSearches");
     pastSearch.attr('id', 'historyBtn');
     pastSearch.html(cityname);
     $(".pastCity").append(pastSearch);
-    $("#historyBtn").on("click", function (event) {
+
+    $(".historyBtn").on("click", function(event){
+        clearDiv();
         var histBtn = $("#historyBtn").html();
         console.log("what is the town places",histBtn);
+        console.log ("you clicked", histBtn)
         displaydaily(histBtn);
         fiveDay(histBtn);
     })
+    
+    // if (localStorage.getItem("username") === null) {
+    //     localStorage.setItem("cities", JSON.stringify(storedHistory));
+    // }
+    // else{
+    //     var reCity = localStorage.getItem("cities").val([0]);
+    //     var pastSearch = $("<button>");
+    //     pastSearch.addClass("oldSearches");
+    //     pastSearch.attr('id', 'historyBtn');
+    //     pastSearch.html(reCity);
+    //     $(".pastCity").append(pastSearch);
 
-
+    // }
 }
 
 
@@ -74,7 +93,6 @@ function fiveDay(latitude,longitude,todaydate){
     var pForTitle = whatTitle.html("5-DAY Forcast");
     $("#fivedayTitle").append(pForTitle);
     var dateVar = todaydate;
-    var dateValidate = JSON.parse(dateVar[2])+ 5;
 
     // "current+minutely,hourly,"
     var fiveURL = "http://api.openweathermap.org/data/2.5/onecall?lat="+latitude+"&lon="+longitude+"&exclude=current+minutely,hourly,"+"&appid="+apiKey+"&units=imperial";
@@ -128,7 +146,7 @@ function fiveDay(latitude,longitude,todaydate){
 
 
 function displaydaily(cityname) {
-    clearDiv();
+    // clearDiv();
     
     $(".displayDashboard").addClass("boarderDaily")
     // $(".dailyTitle").empty();
@@ -192,10 +210,10 @@ function displaydaily(cityname) {
 $("#searchBtn").on("click", function (event) {
     $(document).ready();
     event.preventDefault();
+    clearDiv();
     var citySearch = $("#cityInput").val();
     searchHistory(citySearch);
     displaydaily(citySearch);
 
-    
 
 })
