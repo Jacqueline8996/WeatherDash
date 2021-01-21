@@ -95,10 +95,16 @@ function fiveDay(latitude,longitude,todaydate){
         for(i = 1; i < 6; i++) {
             //getting date 
 
+            var dateForcast = JSON.parse(dateVar[2])+i;
+            console.log("what date is it in the forcast", dateForcast);
 
-            // var whatDateForcast = "(" + dateVar[1]+ "/" + dateVar[2] + "/" + dateVar[0] + ")";
-            // $("#day"+i+"cast").append(whatDateForcast);
-            // console.log("what date for the forcast",whatDateForcast);
+            var pDate = $("<p>");
+            var whatDateForcast = pDate.html(dateVar[1]+ "/" + dateForcast + "/" + dateVar[0]);
+            pDate.addClass("dateForcast");
+
+            $("#day"+i+"cast").append(whatDateForcast);
+            console.log("what date for the forcast",whatDateForcast);
+            $("#day"+i+"cast").addClass("forcast")
 
             //get the icon 
             var iconcode = response["daily"][i]["weather"][0]["icon"];
@@ -108,14 +114,14 @@ function fiveDay(latitude,longitude,todaydate){
             //get the tempature
             console.log("my response ", response);
             var tempaturefor = (response["daily"][i]["temp"]["day"]);
-            var whatTempfor = $("<p>")
+            var whatTempfor = $("<p>");
             var pForOne = whatTempfor.text("Temp: " + tempaturefor + " F");
             $("#day"+i+"cast").append(pForOne);
 
 
             //finds and adds humidity
             var humidityFor = (response["daily"][i]["humidity"]);
-            var whatHumFor = $("<p>")
+            var whatHumFor = $("<p>");
             var pForTwo = whatHumFor.text("Humidity: " + humidityFor + "%");
             $("#day"+i+"cast").append(pForTwo);
 
@@ -162,7 +168,7 @@ function displaydaily(cityname) {
         console.log("my response ", response);
         // Creating an element to have the tempature displayed
         var tempature = (response["list"][0]["main"]["temp"]);
-        var whatTemp = $("<p>")
+        var whatTemp = $("<p>");
         // var degree = $("<sup>")
 
         var pOne = whatTemp.text("Tempature: " + tempature + "F");
@@ -170,13 +176,13 @@ function displaydaily(cityname) {
 
         //finds and adds humidity
         var humidity = (response["list"][0]["main"]["humidity"]);
-        var whatHum = $("<p>")
+        var whatHum = $("<p>");
         var pTwo = whatHum.text("Humidity: " + humidity + "%");
         $("#displayInfo").append(pTwo);
 
         //find and add wind speed 
         var windSpeed = (response["list"][0]["wind"]["speed"]);
-        var whatSpeed = $("<p>")
+        var whatSpeed = $("<p>");
         var pThree = whatSpeed.text("WindSpeed: " + windSpeed + "MPH");
         $("#displayInfo").append(pThree);
 
