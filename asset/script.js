@@ -11,7 +11,6 @@ function searchHistory(cityname){
     $("#historyBtn").on("click", function (event) {
         var histBtn = $("#historyBtn").html();
         console.log("what is the town places",histBtn);
-        storeHistory(histBtn);
         displaydaily(histBtn);
         fiveDay(histBtn);
     })
