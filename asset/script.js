@@ -40,7 +40,7 @@ function searchHistory(cityname){
 
 function uVData(latitude, longitude){
 
-    var uvUrL = "http://api.openweathermap.org/data/2.5/uvi?lat="+latitude+"&lon="+longitude+"&appid="+apiKey;
+    var uvUrL = "https://api.openweathermap.org/data/2.5/uvi?lat="+latitude+"&lon="+longitude+"&appid="+apiKey;
 
     // Creating an AJAX call for the specific movie button being clicked
     $.ajax({
@@ -95,7 +95,7 @@ function fiveDay(latitude,longitude,todaydate){
     var dateVar = todaydate;
 
     // "current+minutely,hourly,"
-    var fiveURL = "http://api.openweathermap.org/data/2.5/onecall?lat="+latitude+"&lon="+longitude+"&exclude=current+minutely,hourly,"+"&appid="+apiKey+"&units=imperial";
+    var fiveURL = "https://api.openweathermap.org/data/2.5/onecall?lat="+latitude+"&lon="+longitude+"&exclude=current+minutely,hourly,"+"&appid="+apiKey+"&units=imperial";
    
 
     // Creating an AJAX call for the specific movie button being clicked
@@ -120,7 +120,7 @@ function fiveDay(latitude,longitude,todaydate){
 
             //get the icon 
             var iconcode = response["daily"][i]["weather"][0]["icon"];
-            var iconurl = "http://openweathermap.org/img/w/" + iconcode + ".png";
+            var iconurl = "https://openweathermap.org/img/w/" + iconcode + ".png";
             $("#day"+i+"cast").append('<img id="weatherImage2"' + "src="+ iconurl + ' />');
             
             //get the tempature
@@ -150,7 +150,7 @@ function displaydaily(cityname) {
     
     $(".displayDashboard").addClass("boarderDaily")
     // $(".dailyTitle").empty();
-    var queryURL = "http://api.openweathermap.org/data/2.5/forecast?q="+cityname+"&appid="+apiKey+"&units=imperial";
+    var queryURL = "https://api.openweathermap.org/data/2.5/forecast?q="+cityname+"&appid="+apiKey+"&units=imperial";
 
     // Creating an AJAX call for the specific movie button being clicked
     $.ajax({
@@ -170,7 +170,7 @@ function displaydaily(cityname) {
 
         //Adding in ICON To the event 
         var iconcode = response["list"][0]["weather"][0]["icon"]
-        var iconurl = "http://openweathermap.org/img/w/" + iconcode + ".png";
+        var iconurl = "https://openweathermap.org/img/w/" + iconcode + ".png";
         $("#icon").append('<img id="weatherImage"' + "src="+ iconurl + ' />');
         
         // Creating an element to have the tempature displayed
