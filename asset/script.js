@@ -7,36 +7,30 @@ function searchHistory(cityname){
     console.log("how long is my list", storedHistory);
     
 
-
-    var pastSearch = $("<button>");
+    var pastSearch = $("<button>").text(cityname);
     pastSearch.addClass("oldSearches");
     pastSearch.attr('id', 'historyBtn');
-    pastSearch.html(cityname);
-    $(".pastCity").append(pastSearch);
 
-    $(".historyBtn").on("click", function(event){
+    $(".pastCity").prepend(pastSearch);
+    $("#historyBtn").on("click", function(event){
+        event.preventDefault();
+        // clearDiv();
+        // var histBtn = $("#historyBtn").html();
+        console.log("what is the town places",pastSearch.text());
+        console.log ("you clicked", pastSearch.text());
         clearDiv();
-        var histBtn = $("#historyBtn").html();
-        console.log("what is the town places",histBtn);
-        console.log ("you clicked", histBtn)
-        displaydaily(histBtn);
-        fiveDay(histBtn);
+        displaydaily(pastSearch.text());
+        // fiveDay(pastSearch.text());
+
     })
-    
-    // if (localStorage.getItem("username") === null) {
-    //     localStorage.setItem("cities", JSON.stringify(storedHistory));
-    // }
-    // else{
-    //     var reCity = localStorage.getItem("cities").val([0]);
-    //     var pastSearch = $("<button>");
-    //     pastSearch.addClass("oldSearches");
-    //     pastSearch.attr('id', 'historyBtn');
-    //     pastSearch.html(reCity);
-    //     $(".pastCity").append(pastSearch);
 
-    // }
 }
+function saveData(){
+    localStorage.setItem("cities", JSON.stringify(storedHistory));
+    const localArray = localStorage.getItem("cities");
+    console.log("what is in my old array", localArray);
 
+}
 
 function uVData(latitude, longitude){
 
@@ -78,8 +72,8 @@ function clearDiv(){
     $("#todayDate").empty();
     $("#icon").empty();
     $("#displayInfo").empty();
-    $("#fiveDay").empty();
     $("#fivedayTitle").empty();
+    $(".wordsTitle").empty();
     $("#day1cast").empty();
     $("#day2cast").empty();
     $("#day3cast").empty();
@@ -88,10 +82,11 @@ function clearDiv(){
 }
 
 function fiveDay(latitude,longitude,todaydate){
+    // clearDiv();
     $(".fiveDay").addClass("boarderFive");
-    var whatTitle = $("<p>");
-    var pForTitle = whatTitle.html("5-DAY Forcast");
-    $("#fivedayTitle").append(pForTitle);
+    var whatTitle = $("<p>").attr('id', 'fivedayTitle');
+    var pForTitle = whatTitle.text("5-DAY Forcast");
+    $(".fiveDay").prepend(pForTitle);
     var dateVar = todaydate;
 
     // "current+minutely,hourly,"
@@ -208,6 +203,7 @@ function displaydaily(cityname) {
 
 //Gets the name of the town 
 $("#searchBtn").on("click", function (event) {
+    saveData();
     $(document).ready();
     event.preventDefault();
     clearDiv();
