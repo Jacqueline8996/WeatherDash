@@ -1,37 +1,53 @@
 var apiKey = "dcb8c612edc0549f82dca82fa9beb12d";
 var storedHistory = [];
 
+//adds the old city to the buttons and stores them in
 function searchHistory(cityname){
     var saveCity = cityname;
     storedHistory.push(saveCity);
-    console.log("how long is my list", storedHistory);
-    
 
+    //creates button for old city
     var pastSearch = $("<button>").text(cityname);
     pastSearch.addClass("oldSearches");
     pastSearch.attr('id', 'historyBtn');
 
+    //adds button to the div
     $(".pastCity").prepend(pastSearch);
     $("#historyBtn").on("click", function(event){
         event.preventDefault();
-        // clearDiv();
-        // var histBtn = $("#historyBtn").html();
         console.log("what is the town places",pastSearch.text());
         console.log ("you clicked", pastSearch.text());
         clearDiv();
         displaydaily(pastSearch.text());
-        // fiveDay(pastSearch.text());
-
     })
-
+    saveData();
+    
 }
+
+//saves the data of the buttons in order to be loaded later
 function saveData(){
-    localStorage.setItem("cities", JSON.stringify(storedHistory));
-    const localArray = localStorage.getItem("cities");
-    console.log("what is in my old array", localArray);
-
+    var cityPast = storedHistory;
+    localStorage.setItem("cities", JSON.stringify(cityPast));
 }
 
+//displays last saved button and loads last search 
+function displaySave(){
+
+    let saveCities = JSON.parse(localStorage.getItem("cities"));
+    var lastCityIndex = saveCities.length - 1
+
+    if (saveCities == null){
+        cities = [];
+    }else{
+       var lastCityIndex = saveCities.length - 1
+        for (i4 = 0; i4 < saveCities.length ; i4++){
+         searchHistory(saveCities[i4])
+        }
+        displaydaily(saveCities[lastCityIndex]);
+    }
+}
+
+//gets the UVDATA using lat and longituted
 function uVData(latitude, longitude){
 
     var uvUrL = "https://api.openweathermap.org/data/2.5/uvi?lat="+latitude+"&lon="+longitude+"&appid="+apiKey;
@@ -60,12 +76,26 @@ function uVData(latitude, longitude){
         else{
             whatUv.addClass("low");
         }
-        
         $("#displayInfo").append(pFour);
 
     });
 }
 
+//activates the clear button and removes  info from buttons and clearing local storage.
+function ClearHistory(){
+
+    $("#clearHist").click(function() {
+        console.log("button in clear");
+        $(".pastCity").empty();
+
+        //by loading a empty list it prevents breaks of the code
+        var cityClear = []
+        localStorage.setItem("cities", JSON.stringify(cityClear));
+        
+    });
+}
+
+//clear divs
 function clearDiv(){
     $(".dailyTitle").empty();
     $("#nameOfCity").empty();
@@ -81,18 +111,16 @@ function clearDiv(){
     $("#day5cast").empty();
 }
 
+//Gets the five day forcast
 function fiveDay(latitude,longitude,todaydate){
-    // clearDiv();
+    
     $(".fiveDay").addClass("boarderFive");
     var whatTitle = $("<p>").attr('id', 'fivedayTitle');
     var pForTitle = whatTitle.text("5-DAY Forcast");
     $(".fiveDay").prepend(pForTitle);
     var dateVar = todaydate;
-
-    // "current+minutely,hourly,"
     var fiveURL = "https://api.openweathermap.org/data/2.5/onecall?lat="+latitude+"&lon="+longitude+"&exclude=current+minutely,hourly,"+"&appid="+apiKey+"&units=imperial";
    
-
     // Creating an AJAX call for the specific movie button being clicked
     $.ajax({
     url: fiveURL,
@@ -139,7 +167,7 @@ function fiveDay(latitude,longitude,todaydate){
        
 }
 
-
+//display Daily Block
 function displaydaily(cityname) {
     // clearDiv();
     
@@ -201,15 +229,24 @@ function displaydaily(cityname) {
 }
 
 
-//Gets the name of the town 
-$("#searchBtn").on("click", function (event) {
-    saveData();
-    $(document).ready();
-    event.preventDefault();
-    clearDiv();
-    var citySearch = $("#cityInput").val();
-    searchHistory(citySearch);
-    displaydaily(citySearch);
+//gets everything working
+function main(){
 
+    displaySave();
+    ClearHistory()
 
-})
+    $("#searchBtn").on("click", function (event) {
+        $(document).ready();
+        event.preventDefault();
+        clearDiv();
+        var citySearch = $("#cityInput").val();
+        // saveData(citySearch);
+        searchHistory(citySearch);
+        displaydaily(citySearch);
+    
+    })
+   
+}
+
+//calls main
+main();
