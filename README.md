@@ -3,12 +3,12 @@ A weather dashboard with a list of all previously searched city. Once the page i
 * Broken down into Two sections A daily forcast for the area and a area for a five day forcast:
 
 * * The daily forcast consit of Tempature in FarienHeight, Humidity, WindSpeed, and UV index
-* * UV index ranges from Extreme to Low 
-* * * (Extrem = purple){Range UV INDEX ABOVE 11}
-* * * (Extrem = red){Range UV INDEX between 8 to 11}
-* * * (Extrem = orange){Range UV INDEX between 7 to 6}
-* * * (Extrem = yellow){Range UV INDEX between 3 to 5}
-* * * (low = green){Range UV INDEX below 3}
+    * UV index ranges from Extreme to Low 
+        * (Extrem = purple){Range UV INDEX ABOVE 11}
+        * (Extrem = red){Range UV INDEX between 8 to 11}
+        * (Extrem = orange){Range UV INDEX between 7 to 6}
+        * (Extrem = yellow){Range UV INDEX between 3 to 5}
+        * (low = green){Range UV INDEX below 3}
 
 * * The five day includes the date , tempature ,humidity and icon.
 
