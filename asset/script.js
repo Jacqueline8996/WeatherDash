@@ -34,16 +34,19 @@ function saveData(){
 function displaySave(){
 
     let saveCities = JSON.parse(localStorage.getItem("cities"));
-    var lastCityIndex = saveCities.length - 1
+    // var lastCityIndex = saveCities.length - 1
 
-    if (saveCities.length == 0){
-        cities = [];
-    }else{
-       var lastCityIndex = saveCities.length - 1
+    if (saveCities != null && saveCities.length > 0){
+
+        var lastCityIndex = saveCities.length - 1
         for (i4 = 0; i4 < saveCities.length ; i4++){
          searchHistory(saveCities[i4])
         }
         displaydaily(saveCities[lastCityIndex]);
+
+    }else{
+        clearcity = [];
+        localStorage.setItem("cities", JSON.stringify(clearcity));
     }
 }
 
@@ -231,7 +234,8 @@ function displaydaily(cityname) {
 
 //gets everything working
 function main(){
-
+   
+    displaySave();
     ClearHistory()
 
     $("#searchBtn").on("click", function (event) {
@@ -244,9 +248,7 @@ function main(){
         displaydaily(citySearch);
     
     })
-    if (storedHistory.length-1 >= 0){
-        displaySave();
-    }
+
 }
 
 //calls main
