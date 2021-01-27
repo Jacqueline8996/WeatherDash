@@ -36,7 +36,7 @@ function displaySave(){
     let saveCities = JSON.parse(localStorage.getItem("cities"));
     var lastCityIndex = saveCities.length - 1
 
-    if (saveCities == null){
+    if (saveCities.length == 0){
         cities = [];
     }else{
        var lastCityIndex = saveCities.length - 1
@@ -232,7 +232,7 @@ function displaydaily(cityname) {
 //gets everything working
 function main(){
 
-    displaySave();
+    // displaySave();
     ClearHistory()
 
     $("#searchBtn").on("click", function (event) {
@@ -245,7 +245,9 @@ function main(){
         displaydaily(citySearch);
     
     })
-   
+    if (storedHistory.length-1 >= 0){
+        displaySave();
+    }
 }
 
 //calls main
