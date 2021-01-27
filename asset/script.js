@@ -232,7 +232,6 @@ function displaydaily(cityname) {
 //gets everything working
 function main(){
 
-    // displaySave();
     ClearHistory()
 
     $("#searchBtn").on("click", function (event) {
