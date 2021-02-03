@@ -135,7 +135,7 @@ function fiveDay(latitude,longitude,todaydate){
 
         //get the 5 day forcast
         for(i = 1; i < 6; i++) {
-            
+            //getting date var
             var dateForcast = (parseInt(dateVar[2]))+i;
             
             var pDate = $("<p>");
