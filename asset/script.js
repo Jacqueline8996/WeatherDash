@@ -129,14 +129,15 @@ function fiveDay(latitude,longitude,todaydate){
     url: fiveURL,
     method: "GET"
     }).then(function(response) {
+        
         var whatTitleFor = $("<p>")
         $(whatTitleFor).html("date"+1)
 
         //get the 5 day forcast
         for(i = 1; i < 6; i++) {
-
-            //getting date 
-            var dateForcast = JSON.parse(dateVar[2])+i;
+            
+            var dateForcast = (parseInt(dateVar[2]))+i;
+            
             var pDate = $("<p>");
             var whatDateForcast = pDate.html(dateVar[1]+ "/" + dateForcast + "/" + dateVar[0]);
             pDate.addClass("dateForcast");
