@@ -20,8 +20,8 @@ Once the month changes the date needs to be fixed so it works correctly in betwe
 
 # Installation:
   There is no installation required for this page, all files can be viewed at the following link:
-* Git Repository: https://github.com/Jacqueline8996/Homework6.git/
-* Git Hub Page : https://jacqueline8996.github.io/Homework6/
+* Git Repository: https://github.com/Jacqueline8996/WeatherDash.git
+* Git Hub Page : https://jacqueline8996.github.io/WeatherDash/
 
 # IMage of deployed app in use:
 ![alt text](asset/Images/DashboardIMG.png)
